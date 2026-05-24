@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rockfall Risk Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f6f9;
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .main {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .left,
+        .right {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            flex: 1 1 400px;
+            min-width: 280px;
+        }
+
+        .right {
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+        }
+
+        .left img {
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 12px;
+            width: 100%;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        .result {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .high {
+            color: red;
+        }
+
+        .medium {
+            color: orange;
+        }
+
+        .low {
+            color: green;
+        }
+
+        @media (max-width: 860px) {
+            .main {
+                padding: 15px;
+            }
+
+            .left,
+            .right {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    Rockfall Risk Monitoring System
+</div>
+
+<div class="main">
+
+    <!-- LEFT: GRAPH -->
+    <div class="left">
+        <h3>Risk Distribution</h3>
+        <img src="/static/plot.png" width="100%">
+    </div>
+
+    <!-- RIGHT: FORM -->
+    <div class="right">
+        <h3>Predict Risk</h3>
+
+        <form action="/predict" method="post">
+            <input type="text" name="f1" placeholder="Slope Angle">
+            <input type="text" name="f2" placeholder="Rock Strength">
+            <input type="text" name="f3" placeholder="Weathering Index">
+            <input type="text" name="f4" placeholder="Human Activity">
+            <input type="text" name="f5" placeholder="Rainfall Intensity">
+            <input type="text" name="f6" placeholder="Slope Stability">
+            <input type="text" name="f7" placeholder="Seismic Activity">
+            <input type="text" name="f8" placeholder="Blasting Frequency">
+            <input type="text" name="f9" placeholder="Rainfall mm">
+            <input type="text" name="f10" placeholder="Temperature Variation">
+            <input type="text" name="f11" placeholder="Soil Moisture">
+            <input type="text" name="f12" placeholder="Vegetation Cover">
+            <input type="text" name="f13" placeholder="Mining Depth">
+
+            <button type="submit">Predict</button>
+        </form>
+
+        <div class="result">
+            {{ prediction_text }}
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
